@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 /// <summary>
 /// 建造工具类，用于处理建造和删除物体的逻辑
@@ -21,7 +22,9 @@ public class BuildTool : MonoBehaviour
     
     private Camera _camera;
 
-    public GameObject gameObjectToPosition;
+    [SerializeField] private Building spawnedBuilding;
+
+    private Building _targetBuilding;
 
     /// <summary>
     /// 初始化组件引用
@@ -64,10 +67,43 @@ public class BuildTool : MonoBehaviour
     private void DeleteModeLogic()
     {
         // 检测是否击中可删除物体
-        if (!IsRayHittingSomething(deleteModeLayerMask, out RaycastHit hitInfo)) return;
+        if (IsRayHittingSomething(deleteModeLayerMask, out RaycastHit hitInfo))
+        {
+            var detectedBuilding = hitInfo.collider.gameObject.GetComponentInParent<Building>();
         
-        // 鼠标左键点击时销毁击中的物体
-        if (Mouse.current.leftButton.wasPressedThisFrame) Destroy(hitInfo.collider.gameObject);
+            if (detectedBuilding == null) return;
+        
+            if (_targetBuilding == null) _targetBuilding = detectedBuilding;
+
+            // 切换目标建筑时取消之前的目标删除标记
+            if (detectedBuilding != _targetBuilding && _targetBuilding.flaggedForDelete)
+            {
+                _targetBuilding.RemoveDeleteFlag();
+                _targetBuilding = detectedBuilding;
+            }
+
+            // 当前目标未被标记为删除时进行标记
+            if (detectedBuilding == _targetBuilding && !_targetBuilding.flaggedForDelete)
+            {
+                _targetBuilding.FlagForDelete(buildingMatNegative);
+            }
+        
+            // 鼠标左键点击时销毁击中的物体
+            if (Mouse.current.leftButton.wasPressedThisFrame)
+            {
+                Destroy(_targetBuilding.gameObject);
+                _targetBuilding = null;
+            }
+        }
+        else
+        { 
+            // 射线未命中任何对象且有已选中的目标时移除其删除标记
+            if (_targetBuilding != null && _targetBuilding.flaggedForDelete)
+            {
+                _targetBuilding.RemoveDeleteFlag();
+                _targetBuilding = null;
+            }
+        }
     }
 
     /// <summary>
@@ -75,17 +111,35 @@ public class BuildTool : MonoBehaviour
     /// </summary>
     private void BuildModeLogic()
     {
+        // 若处于建造模式但仍有待删除的目标，则清除该状态
+        if (_targetBuilding != null && _targetBuilding.flaggedForDelete)
+        {
+            _targetBuilding.RemoveDeleteFlag();
+            _targetBuilding = null;
+        }
+
         // 检查是否有待放置的物体
-        if (gameObjectToPosition == null) return;
+        if (spawnedBuilding == null) return;
         
         // 检测是否击中可建造表面
-        if (!IsRayHittingSomething(buildModeLayerMask, out RaycastHit hitInfo)) return;
-        
-        // 将待放置物体定位到击中点
-        gameObjectToPosition.transform.position = hitInfo.point;
-
-        // 鼠标左键点击时在击中位置实例化物体
-        if (Mouse.current.leftButton.wasPressedThisFrame)
-            Instantiate(gameObjectToPosition, hitInfo.point, Quaternion.identity);
+        if (!IsRayHittingSomething(buildModeLayerMask, out RaycastHit hitInfo))
+        {
+            // 未命中有效位置时显示无效材料效果
+            spawnedBuilding.UpdateMaterial(buildingMatNegative);
+        }
+        else
+        {
+            // 命中有效位置时应用正常材料并调整到网格对齐位置
+            spawnedBuilding.UpdateMaterial(buildingMatPositive);
+            var gridPosition = WorldGrid.GridPositionFromWorldPoint3D(hitInfo.point, 1f);
+            spawnedBuilding.transform.position = gridPosition;
+            
+            // 鼠标左键点击时在击中位置实例化物体
+            if (Mouse.current.leftButton.wasPressedThisFrame)
+            {
+                Building placedBuilding = Instantiate(spawnedBuilding, gridPosition, Quaternion.identity);
+                placedBuilding.PlaceBuilding();
+            }
+        }
     }
 }

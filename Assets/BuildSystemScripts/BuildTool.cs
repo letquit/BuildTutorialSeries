@@ -10,6 +10,7 @@ using UnityEngine.Serialization;
 /// </summary>
 public class BuildTool : MonoBehaviour
 {
+    [SerializeField] private float rotateSnapAngle = 90f;
     [SerializeField] private float rayDistance;
     [SerializeField] private LayerMask buildModeLayerMask;
     [SerializeField] private LayerMask deleteModeLayerMask;
@@ -25,13 +26,51 @@ public class BuildTool : MonoBehaviour
     [SerializeField] private Building spawnedBuilding;
 
     private Building _targetBuilding;
+    private Quaternion _lastRotation;
+
+    public BuildingData data;
 
     /// <summary>
-    /// 初始化组件引用
+    /// 初始化组件引用，并根据初始数据选择要放置的部件
     /// </summary>
     private void Start()
     {
         _camera = Camera.main;
+        
+        ChoosePart(data);
+    }
+
+    /// <summary>
+    /// 根据传入的数据创建一个新的预览建筑对象。如果当前处于删除模式或已有预览对象，则先清理旧状态。
+    /// </summary>
+    /// <param name="bData">用于初始化新建筑的数据</param>
+    private void ChoosePart(BuildingData bData)
+    {
+        // 如果当前处于删除模式，清除删除标记并重置相关状态
+        if (_deleteModeEnabled)
+        {
+            if (_targetBuilding != null && _targetBuilding.flaggedForDelete) _targetBuilding.RemoveDeleteFlag();
+            _targetBuilding = null;
+            _deleteModeEnabled = false;
+        }
+
+        // 销毁已存在的预览建筑对象
+        if (spawnedBuilding != null)
+        {
+            Destroy(spawnedBuilding.gameObject);
+            spawnedBuilding = null;
+        }
+
+        // 创建新的预览建筑对象并初始化
+        var go = new GameObject
+        {
+            layer = defaultLayerInt,
+            name = "Build Preview"
+        };
+        
+        spawnedBuilding = go.AddComponent<Building>();
+        spawnedBuilding.Init(bData);
+        spawnedBuilding.transform.rotation = _lastRotation;
     }
 
     /// <summary>
@@ -62,7 +101,7 @@ public class BuildTool : MonoBehaviour
     }
 
     /// <summary>
-    /// 删除模式逻辑，处理物体删除操作
+    /// 删除模式逻辑，处理物体删除操作。包括高亮显示可删除对象、标记待删对象以及响应鼠标点击进行实际销毁。
     /// </summary>
     private void DeleteModeLogic()
     {
@@ -107,7 +146,7 @@ public class BuildTool : MonoBehaviour
     }
 
     /// <summary>
-    /// 建造模式逻辑，处理物体放置操作
+    /// 建造模式逻辑，处理物体放置操作。包括定位预览模型、旋转控制及最终放置确认。
     /// </summary>
     private void BuildModeLogic()
     {
@@ -120,25 +159,39 @@ public class BuildTool : MonoBehaviour
 
         // 检查是否有待放置的物体
         if (spawnedBuilding == null) return;
+
+        PositionBuildingPreview();
+    }
+
+    /// <summary>
+    /// 控制预览建筑的位置与交互行为：更新材质以反映重叠状态、响应R键旋转、定位到网格点并响应鼠标左键完成放置。
+    /// </summary>
+    private void PositionBuildingPreview()
+    {
+        // 根据是否重叠来更新建筑预览的材质显示
+        spawnedBuilding.UpdateMaterial(spawnedBuilding.isOverlapping ? buildingMatNegative : buildingMatPositive);
         
-        // 检测是否击中可建造表面
-        if (!IsRayHittingSomething(buildModeLayerMask, out RaycastHit hitInfo))
+        // 处理建筑旋转逻辑：按下R键时按指定角度旋转建筑
+        if (Keyboard.current.rKey.wasPressedThisFrame)
         {
-            // 未命中有效位置时显示无效材料效果
-            spawnedBuilding.UpdateMaterial(buildingMatNegative);
+            spawnedBuilding.transform.Rotate(0, rotateSnapAngle, 0);
+            _lastRotation = spawnedBuilding.transform.rotation;
         }
-        else
+        
+        // 处理建筑定位和放置逻辑
+        if (IsRayHittingSomething(buildModeLayerMask, out RaycastHit hitInfo))
         {
-            // 命中有效位置时应用正常材料并调整到网格对齐位置
-            spawnedBuilding.UpdateMaterial(buildingMatPositive);
+            // 将世界坐标点转换为网格坐标并设置建筑位置
             var gridPosition = WorldGrid.GridPositionFromWorldPoint3D(hitInfo.point, 1f);
             spawnedBuilding.transform.position = gridPosition;
             
-            // 鼠标左键点击时在击中位置实例化物体
-            if (Mouse.current.leftButton.wasPressedThisFrame)
+            // 处理建筑放置：当鼠标左键点击且建筑未重叠时完成放置
+            if (Mouse.current.leftButton.wasPressedThisFrame && !spawnedBuilding.isOverlapping)
             {
-                Building placedBuilding = Instantiate(spawnedBuilding, gridPosition, Quaternion.identity);
-                placedBuilding.PlaceBuilding();
+                spawnedBuilding.PlaceBuilding();
+                var dataCopy = spawnedBuilding.assignedData;
+                spawnedBuilding = null;
+                ChoosePart(dataCopy);
             }
         }
     }

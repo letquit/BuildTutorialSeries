@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5611dddd6c69e847b2b75ed5a3b2eac, type: 3}
+  m_Name: Long Room
+  m_EditorClassIdentifier: 
+  displayName: Long Room
+  icon: {fileID: 21300000, guid: 90b32496249c3584fbb88ba0f2679978, type: 3}
+  gridSnapSize: 3
+  prefab: {fileID: 7184528612011658220, guid: 73863e9341adeb84c81882b76b1606d7, type: 3}
+  buildingSize: {x: 5.8, y: 5.8, z: 11.8}
+  partType: 0

@@ -23,7 +23,7 @@ public class BuildTool : MonoBehaviour
     
     private Camera _camera;
 
-    [SerializeField] private Building spawnedBuilding;
+    private Building _spawnedBuilding;
 
     private Building _targetBuilding;
     private Quaternion _lastRotation;
@@ -31,13 +31,11 @@ public class BuildTool : MonoBehaviour
     public BuildingData data;
 
     /// <summary>
-    /// 初始化组件引用，并根据初始数据选择要放置的部件
+    /// 初始化组件引用
     /// </summary>
     private void Start()
     {
         _camera = Camera.main;
-        
-        ChoosePart(data);
     }
 
     /// <summary>
@@ -55,10 +53,10 @@ public class BuildTool : MonoBehaviour
         }
 
         // 销毁已存在的预览建筑对象
-        if (spawnedBuilding != null)
+        if (_spawnedBuilding != null)
         {
-            Destroy(spawnedBuilding.gameObject);
-            spawnedBuilding = null;
+            Destroy(_spawnedBuilding.gameObject);
+            _spawnedBuilding = null;
         }
 
         // 创建新的预览建筑对象并初始化
@@ -68,9 +66,9 @@ public class BuildTool : MonoBehaviour
             name = "Build Preview"
         };
         
-        spawnedBuilding = go.AddComponent<Building>();
-        spawnedBuilding.Init(bData);
-        spawnedBuilding.transform.rotation = _lastRotation;
+        _spawnedBuilding = go.AddComponent<Building>();
+        _spawnedBuilding.Init(bData);
+        _spawnedBuilding.transform.rotation = _lastRotation;
     }
 
     /// <summary>
@@ -158,7 +156,7 @@ public class BuildTool : MonoBehaviour
         }
 
         // 检查是否有待放置的物体
-        if (spawnedBuilding == null) return;
+        if (_spawnedBuilding == null) return;
 
         PositionBuildingPreview();
     }
@@ -169,13 +167,13 @@ public class BuildTool : MonoBehaviour
     private void PositionBuildingPreview()
     {
         // 根据是否重叠来更新建筑预览的材质显示
-        spawnedBuilding.UpdateMaterial(spawnedBuilding.isOverlapping ? buildingMatNegative : buildingMatPositive);
+        _spawnedBuilding.UpdateMaterial(_spawnedBuilding.isOverlapping ? buildingMatNegative : buildingMatPositive);
         
         // 处理建筑旋转逻辑：按下R键时按指定角度旋转建筑
         if (Keyboard.current.rKey.wasPressedThisFrame)
         {
-            spawnedBuilding.transform.Rotate(0, rotateSnapAngle, 0);
-            _lastRotation = spawnedBuilding.transform.rotation;
+            _spawnedBuilding.transform.Rotate(0, rotateSnapAngle, 0);
+            _lastRotation = _spawnedBuilding.transform.rotation;
         }
         
         // 处理建筑定位和放置逻辑
@@ -183,14 +181,14 @@ public class BuildTool : MonoBehaviour
         {
             // 将世界坐标点转换为网格坐标并设置建筑位置
             var gridPosition = WorldGrid.GridPositionFromWorldPoint3D(hitInfo.point, 1f);
-            spawnedBuilding.transform.position = gridPosition;
+            _spawnedBuilding.transform.position = gridPosition;
             
             // 处理建筑放置：当鼠标左键点击且建筑未重叠时完成放置
-            if (Mouse.current.leftButton.wasPressedThisFrame && !spawnedBuilding.isOverlapping)
+            if (Mouse.current.leftButton.wasPressedThisFrame && !_spawnedBuilding.isOverlapping)
             {
-                spawnedBuilding.PlaceBuilding();
-                var dataCopy = spawnedBuilding.assignedData;
-                spawnedBuilding = null;
+                _spawnedBuilding.PlaceBuilding();
+                var dataCopy = _spawnedBuilding.assignedData;
+                _spawnedBuilding = null;
                 ChoosePart(dataCopy);
             }
         }

@@ -14,15 +14,6 @@ public class BuildingPartUI : MonoBehaviour
     private BuildingPanelUI _parentDisplay;
 
     /// <summary>
-    /// 在对象被唤醒时执行初始化操作，获取子物体中的按钮组件并添加点击事件监听器
-    /// </summary>
-    private void Awake()
-    {
-        _button = GetComponentInChildren<Button>();
-        _button.onClick.AddListener(OnButtonClick);
-    }
-
-    /// <summary>
     /// 初始化建筑部件UI界面
     /// </summary>
     /// <param name="assignedData">要显示的建筑数据</param>
@@ -30,9 +21,11 @@ public class BuildingPartUI : MonoBehaviour
     public void Init(BuildingData assignedData, BuildingPanelUI parentDisplay)
     {
         _assignedData = assignedData;
+        _parentDisplay = parentDisplay;
+        _button = GetComponentInChildren<Button>();
+        _button.onClick.AddListener(OnButtonClick);
         // 设置按钮图片为建筑数据中的图标
         _button.GetComponent<Image>().sprite = _assignedData.icon;
-        _parentDisplay = parentDisplay;
     }
     
     /// <summary>

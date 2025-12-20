@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3651417174738872464}
   - component: {fileID: 5768312999970619360}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LeftDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4911073992230608738}
   - component: {fileID: 2591825138574980838}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RightDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7409995597011996601}
   - component: {fileID: 8765242257870613559}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LeftDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7184528611728137956}
   - component: {fileID: 7184528611728137957}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FrontDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7184528611857806183}
   - component: {fileID: 7184528611857806180}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BehindDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7184528611915233812}
   - component: {fileID: 7184528611915233813}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BehindDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +279,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7184528612011658221}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Building_SquareRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -313,7 +313,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7184528612216672317}
   - component: {fileID: 7184528612216672314}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7184528612254759887}
   - component: {fileID: 7184528612254759884}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RightFull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -403,7 +403,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7184528612760357152}
   - component: {fileID: 7184528612760357153}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LeftFull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -448,7 +448,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7184528613347801663}
   - component: {fileID: 7184528613347801660}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FrontDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -493,7 +493,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7184528613636620516}
   - component: {fileID: 7184528613636620517}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FrontDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -538,7 +538,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7184528613709094542}
   - component: {fileID: 7184528613709094543}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BehindDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -582,7 +582,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7184528613735402110}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -631,7 +631,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3675601460728750350}
   - component: {fileID: 7578133116614661731}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LeftDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -676,7 +676,7 @@ GameObject:
   m_Component:
   - component: {fileID: 986902052081916303}
   - component: {fileID: 9121955216953801539}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RightDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -721,7 +721,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1321129962807024128}
   - component: {fileID: 403687544210061898}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FrontFull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -766,7 +766,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6355770478242857057}
   - component: {fileID: 4180812936996075952}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RightDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -811,7 +811,7 @@ GameObject:
   m_Component:
   - component: {fileID: 234015691401123007}
   - component: {fileID: 630164093813178151}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BehindFull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -912,6 +912,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SquareRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6900377cb6b7e5d48b37a903d38d73bc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6900377cb6b7e5d48b37a903d38d73bc, type: 3}

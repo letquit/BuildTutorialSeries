@@ -556,7 +556,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 378026803}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 784581924}
+        m_TargetAssemblyTypeName: BuildingPanelUI, Assembly-CSharp
+        m_MethodName: OnClickRoomParts
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &378026803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -678,7 +690,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 393827619}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 784581924}
+        m_TargetAssemblyTypeName: BuildingPanelUI, Assembly-CSharp
+        m_MethodName: OnClickCorridorParts
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &393827619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1241,6 +1265,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sideUI: {fileID: 2096744463}
+  knownBuildingParts:
+  - {fileID: 11400000, guid: 27ba1b400d25cbc49bef3161ec475183, type: 2}
+  - {fileID: 11400000, guid: 04b4bb2fcd3907a499190cbfa5d5ae9b, type: 2}
+  - {fileID: 11400000, guid: e3172cf591cade64db1a874916fbf760, type: 2}
+  - {fileID: 11400000, guid: 6fc7274d0ee159443b01cfcd4f1823a6, type: 2}
+  - {fileID: 11400000, guid: f7bdfc830eec67a45a15c6aec0e1b0a9, type: 2}
+  - {fileID: 11400000, guid: 27123b2d49ce282489766c1b20107f2e, type: 2}
+  - {fileID: 11400000, guid: 63cbb38fef70f2345b483f381be594ac, type: 2}
+  - {fileID: 11400000, guid: edef0ecd74b2d274481f0e4a9342eafa, type: 2}
+  buildingButtonPrefab: {fileID: 7308451387709636284, guid: d03c82cd1d0a7f449acc68f9db980b62,
+    type: 3}
+  itemWindow: {fileID: 1074686186}
 --- !u!114 &784581925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1795,7 +1831,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1154209246}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 784581924}
+        m_TargetAssemblyTypeName: BuildingPanelUI, Assembly-CSharp
+        m_MethodName: OnClickAllParts
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1154209246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2287,6 +2335,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sideUI: {fileID: 0}
+  knownBuildingParts: []
+  buildingButtonPrefab: {fileID: 0}
+  itemWindow: {fileID: 0}
 --- !u!114 &2042966165
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         buildPanel.gameObject.SetActive(false);
+        SetMouseCursorState(buildPanel.gameObject.activeInHierarchy);
     }
 
     /// <summary>
@@ -29,6 +30,18 @@ public class UIManager : MonoBehaviour
         {
             // 切换建筑面板的激活状态
             buildPanel.gameObject.SetActive(!buildPanel.gameObject.activeInHierarchy);
+            if (buildPanel.gameObject.activeInHierarchy) buildPanel.PopulateButtons();
+            SetMouseCursorState(buildPanel.gameObject.activeInHierarchy);
         }
+    }
+
+    /// <summary>
+    /// 设置鼠标光标的状态和锁定模式
+    /// </summary>
+    /// <param name="visible">光标是否可见，true为可见，false为隐藏</param>
+    private void SetMouseCursorState(bool visible)
+    {
+        Cursor.visible = visible;
+        Cursor.lockState = visible ? CursorLockMode.Confined : CursorLockMode.Locked;
     }
 }

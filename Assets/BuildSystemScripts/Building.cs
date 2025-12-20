@@ -75,6 +75,8 @@ public class Building : MonoBehaviour
         _boxCollider.enabled = false;
         if (_colliders != null) _colliders.gameObject.SetActive(true);
         UpdateMaterial(_defaultMaterial);
+        gameObject.layer = 10;
+        gameObject.name = _assignedData.displayName + " - " + transform.position;
     }
 
     /// <summary>
@@ -84,6 +86,8 @@ public class Building : MonoBehaviour
     /// <param name="newMaterial">需要应用的新材质。</param>
     public void UpdateMaterial(Material newMaterial)
     {
+        // 检查渲染器是否存在
+        if (_renderer == null) return;
         // 只有当新材质与当前材质不同时才进行更新
         if (_renderer.material != newMaterial) _renderer.material = newMaterial;
     }

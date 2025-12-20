@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3632606968714149640}
   - component: {fileID: 1204785801619803616}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FrontFull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 36279002080550067}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2195365516419792842}
   - component: {fileID: 6176716933967468588}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5856139579455474135}
   - component: {fileID: 1136669886791285574}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8796063351753679959}
   - component: {fileID: 7212282641843076093}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BehindFull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7184528612011658221}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Building_ObservatoryRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7184528612216672317}
   - component: {fileID: 7184528612216672314}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,6 +360,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RoomObservatory
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 47e7d739879dac24c84282afbec4919b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47e7d739879dac24c84282afbec4919b, type: 3}

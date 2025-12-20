@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7019959464053789420}
   - component: {fileID: 1759563618563473658}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BehindDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4264251852136159646}
   - component: {fileID: 2648267430449380221}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 914584754387984344}
   - component: {fileID: 2531707353343787037}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FrontDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4990100995552694866}
   - component: {fileID: 4864114955036154572}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BehindDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6652967886398421976}
   - component: {fileID: 1950929389377837811}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BehindDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6476061714952697472}
   - component: {fileID: 3934619576177790261}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BehindDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,7 +280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7184528611728137956}
   - component: {fileID: 7184528611728137957}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FrontDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,7 +324,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7184528612011658221}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Building_CorridorStraight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7184528612216672317}
   - component: {fileID: 7184528612216672314}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -403,7 +403,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7184528613347801663}
   - component: {fileID: 7184528613347801660}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FrontDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,7 +447,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7184528613735402110}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -489,7 +489,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6278415593911704765}
   - component: {fileID: 5219411328649830853}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FrontDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -590,6 +590,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CorridorStraight
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4fc5a85ac81e8484bb8321d737c93e70,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fc5a85ac81e8484bb8321d737c93e70, type: 3}

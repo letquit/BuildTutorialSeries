@@ -39,6 +39,22 @@ public class BuildTool : MonoBehaviour
     }
 
     /// <summary>
+    /// 当组件启用时注册事件监听器
+    /// </summary>
+    private void OnEnable()
+    {
+        BuildingPanelUI.OnPartChosen += ChoosePart;
+    }
+    
+    /// <summary>
+    /// 当组件禁用时注销事件监听器
+    /// </summary>
+    private void OnDisable()
+    {
+        BuildingPanelUI.OnPartChosen -= ChoosePart;
+    }
+
+    /// <summary>
     /// 根据传入的数据创建一个新的预览建筑对象。如果当前处于删除模式或已有预览对象，则先清理旧状态。
     /// </summary>
     /// <param name="bData">用于初始化新建筑的数据</param>
@@ -52,12 +68,7 @@ public class BuildTool : MonoBehaviour
             _deleteModeEnabled = false;
         }
 
-        // 销毁已存在的预览建筑对象
-        if (_spawnedBuilding != null)
-        {
-            Destroy(_spawnedBuilding.gameObject);
-            _spawnedBuilding = null;
-        }
+        DeleteObjectPreview();
 
         // 创建新的预览建筑对象并初始化
         var go = new GameObject
@@ -76,6 +87,8 @@ public class BuildTool : MonoBehaviour
     /// </summary>
     private void Update()
     {
+        // ESC键清理预览
+        if (_spawnedBuilding && Keyboard.current.escapeKey.wasPressedThisFrame) DeleteObjectPreview();
         // Q键切换删除模式
         if (Keyboard.current.qKey.wasPressedThisFrame) _deleteModeEnabled = !_deleteModeEnabled;
         
@@ -84,6 +97,19 @@ public class BuildTool : MonoBehaviour
             DeleteModeLogic();
         else
             BuildModeLogic();
+    }
+
+    /// <summary>
+    /// 删除对象预览
+    /// </summary>
+    private void DeleteObjectPreview()
+    {
+        // 销毁已存在的预览建筑对象
+        if (_spawnedBuilding != null)
+        {
+            Destroy(_spawnedBuilding.gameObject);
+            _spawnedBuilding = null;
+        }
     }
 
     /// <summary>

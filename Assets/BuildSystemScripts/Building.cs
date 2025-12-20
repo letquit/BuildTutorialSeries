@@ -36,13 +36,16 @@ public class Building : MonoBehaviour
     /// </summary>
     public bool flaggedForDelete => _flaggedForDelete;
 
+    private BuildingSaveData _saveData;
+
     /// <summary>
     /// 初始化建筑物组件及其相关数据。
     /// 设置碰撞体大小、位置及触发器属性，并实例化预制件作为图形显示。
     /// 同时获取渲染器和默认材质。
     /// </summary>
     /// <param name="data">要绑定到此建筑物的 BuildingData 数据。</param>
-    public void Init(BuildingData data)
+    /// <param name="saveData">可选参数，用于加载已保存的建筑信息。</param>
+    public void Init(BuildingData data, BuildingSaveData saveData = null)
     {
         _assignedData = data;
         
@@ -64,6 +67,8 @@ public class Building : MonoBehaviour
         // 查找并禁用碰撞器对象
         _colliders = _graphic.transform.Find("Colliders");
         if (_colliders != null) _colliders.gameObject.SetActive(false);
+        
+        if (saveData != null) _saveData = saveData;
     }
 
     /// <summary>
@@ -77,6 +82,12 @@ public class Building : MonoBehaviour
         UpdateMaterial(_defaultMaterial);
         gameObject.layer = 10;
         gameObject.name = _assignedData.displayName + " - " + transform.position;
+
+        if (_saveData == null)
+            _saveData = new BuildingSaveData(gameObject.name, _assignedData, transform.position, transform.rotation);
+        
+        if (!SaveGameManager.Data.buildingSaveData.Contains(_saveData))
+            SaveGameManager.Data.buildingSaveData.Add(_saveData);
     }
 
     /// <summary>
@@ -129,5 +140,57 @@ public class Building : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         _isOverlapping = false;
+    }
+
+    /// <summary>
+    /// 当对象被销毁时调用，从存档中移除此建筑物的信息。
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (SaveGameManager.Data.buildingSaveData.Contains(_saveData))
+            SaveGameManager.Data.buildingSaveData.Remove(_saveData);
+    }
+}
+
+/// <summary>
+/// 表示建筑物持久化存储所需的基本数据结构。
+/// 包含名称、关联数据以及空间变换信息。
+/// </summary>
+[Serializable]
+public class BuildingSaveData
+{
+    /// <summary>
+    /// 建筑物的唯一标识名。
+    /// </summary>
+    public string buildingName;
+
+    /// <summary>
+    /// 关联的建筑物定义数据。
+    /// </summary>
+    public BuildingData assignedData;
+
+    /// <summary>
+    /// 建筑物的世界坐标位置。
+    /// </summary>
+    public Vector3 position;
+
+    /// <summary>
+    /// 建筑物的世界旋转角度。
+    /// </summary>
+    public Quaternion rotation;
+
+    /// <summary>
+    /// 构造一个新的 BuildingSaveData 实例。
+    /// </summary>
+    /// <param name="buildingName">建筑物的名称。</param>
+    /// <param name="assignedData">对应的 BuildingData 数据。</param>
+    /// <param name="position">世界中的位置向量。</param>
+    /// <param name="rotation">世界中的旋转四元数。</param>
+    public BuildingSaveData(string buildingName, BuildingData assignedData, Vector3 position, Quaternion rotation)
+    {
+        this.buildingName = buildingName;
+        this.assignedData = assignedData;
+        this.position = position;
+        this.rotation = rotation;
     }
 }
